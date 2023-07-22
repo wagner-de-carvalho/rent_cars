@@ -56,7 +56,7 @@ defmodule RentCars.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-        {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:sobelow, "~> 0.8", only: :dev},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
