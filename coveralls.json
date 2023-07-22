@@ -1,5 +1,11 @@
 {
     "skip_files": [
+        "lib/rent_cars/application.ex",
+        "lib/rent_cars/release.ex",
+        "lib/rent_cars_web.ex",
+        "ib/rent_cars_web/router.ex",
+        "lib/rent_cars_web/telemetry.ex",
+        "lib/rent_cars_web/views/*",
         "test/support/data_case.ex"
     ],
     "coverage_options": {
