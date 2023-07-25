@@ -25,7 +25,7 @@ defmodule RentCarsWeb.Api.CategoryController do
   end
 
   def show(conn, %{"id" => id}) do
-    with %Category{} = category <- Categories.get_category(id) do
+    with %Category{} = category <- Categories.get_category!(id) do
       conn
       |> put_status(:ok)
       |> render("show.json", category: category)

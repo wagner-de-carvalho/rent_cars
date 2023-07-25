@@ -30,4 +30,29 @@ defmodule RentCars.CategoriesTest do
     assert "has already been taken" in errors_on(changeset).name
     assert %{name: ["has already been taken"]} = errors_on(changeset)
   end
+
+  test "get_category/1" do
+    attrs = %{name: "Acme test", description: "Description"}
+    {:ok, category} = Categories.create_category(attrs)
+
+    assert Categories.get_category!(category.id) == category
+  end
+
+  test "update_category/2" do
+    attrs = %{name: "Acme test", description: "Description"}
+    {:ok, category} = Categories.create_category(attrs)
+
+    {:ok, category_updated} = Categories.update_category(category, %{name: "Acme updated"})
+
+    assert category_updated.name == String.upcase("Acme updated")
+  end
+
+  test "delete_category/1" do
+    attrs = %{name: "Acme test", description: "Description"}
+    {:ok, category} = Categories.create_category(attrs)
+
+    Categories.delete_category(category)
+
+    assert_raise Ecto.NoResultsError, fn -> Categories.get_category!(category.id) end
+  end
 end
