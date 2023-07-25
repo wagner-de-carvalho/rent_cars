@@ -5,7 +5,7 @@ defmodule RentCars.Categories.Category do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key :binary_id
 
-  @fields ~w/name description/a
+  @fields ~w/description name/a
 
   schema "categories" do
     field :name, :string
@@ -20,5 +20,8 @@ defmodule RentCars.Categories.Category do
   def changeset(categories, params) do
     categories
     |> cast(params, @fields)
+    |> unique_constraint(:name)
+    |> validate_required(@fields)
+    |> update_change(:name, &String.upcase/1)
   end
 end

@@ -3,4 +3,10 @@ defmodule RentCars.Categories do
   alias RentCars.Repo
 
   def list_categories, do: Repo.all(Category)
+
+  def create_category(attrs) do
+    attrs
+    |> Category.changeset()
+    |> Repo.insert()
+  end
 end
