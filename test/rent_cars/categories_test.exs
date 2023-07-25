@@ -23,7 +23,7 @@ defmodule RentCars.CategoriesTest do
   end
 
   test "create_category/1 with duplicated name" do
-     attrs = %{description: "Acme 33", name: "sport"}
+    attrs = %{description: "Acme 33", name: "sport"}
 
     Categories.create_category(attrs)
     assert {:error, changeset} = Categories.create_category(attrs)

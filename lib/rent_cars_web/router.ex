@@ -25,6 +25,8 @@ defmodule RentCarsWeb.Router do
     pipe_through :api
 
     get "/categories", CategoryController, :index
+    get "/categories/:id", CategoryController, :show
+    post "/categories", CategoryController, :create
   end
 
   # Enables LiveDashboard only for development
