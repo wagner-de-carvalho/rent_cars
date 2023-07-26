@@ -19,5 +19,4 @@ defmodule RentCars.Categories do
   end
 
   def delete_category(category), do: Repo.delete(category)
-
 end
