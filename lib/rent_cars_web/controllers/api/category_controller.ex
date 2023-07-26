@@ -2,7 +2,7 @@ defmodule RentCarsWeb.Api.CategoryController do
   use RentCarsWeb, :controller
   alias RentCars.Categories
   alias RentCars.Categories.Category
-  alias RentCarsWeb.Api.FallbackController
+  alias RentCarsWeb.FallbackController
 
   action_fallback FallbackController
 

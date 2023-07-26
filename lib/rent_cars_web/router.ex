@@ -29,6 +29,8 @@ defmodule RentCarsWeb.Router do
     post "/categories", CategoryController, :create
     put "/categories/:id", CategoryController, :update
     delete "/categories/:id", CategoryController, :delete
+
+    resources "/specifications", SpecificationController
   end
 
   # Enables LiveDashboard only for development
