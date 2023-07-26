@@ -13,13 +13,11 @@ defmodule RentCars.Categories.Category do
     timestamps()
   end
 
-  def changeset(params \\ %{}) do
-    changeset(%__MODULE__{}, params)
-  end
+  def changeset(attrs \\ %{}), do: changeset(%__MODULE__{}, attrs)
 
-  def changeset(categories, params) do
+  def changeset(categories, attrs) do
     categories
-    |> cast(params, @fields)
+    |> cast(attrs, @fields)
     |> unique_constraint(:name)
     |> validate_required(@fields)
     |> update_change(:name, &String.upcase/1)

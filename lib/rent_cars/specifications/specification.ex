@@ -13,6 +13,8 @@ defmodule RentCars.Specifications.Specification do
   end
 
   @doc false
+  def changeset(attrs), do: changeset(%__MODULE__{}, attrs)
+
   def changeset(specification, attrs) do
     specification
     |> cast(attrs, [:name, :description])
