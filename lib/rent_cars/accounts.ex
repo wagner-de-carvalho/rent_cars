@@ -7,4 +7,8 @@ defmodule RentCars.Accounts do
     |> User.changeset()
     |> Repo.insert()
   end
+
+  def get_user!(id), do: Repo.get!(User, id)
+
+  def list_users, do: Repo.all(User)
 end
