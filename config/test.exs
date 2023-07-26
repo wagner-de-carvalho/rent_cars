@@ -20,6 +20,10 @@ config :rent_cars, RentCarsWeb.Endpoint,
   secret_key_base: "b/rWF8jTArTz+RUc9g68NMDk6Gew1++1jB0mykucmoOx2bcl5stykRl8d1drUHgC",
   server: false
 
+config :argon2_elixir,
+  t_cost: 1,
+  m_cost: 8
+
 # In test we don't send emails.
 config :rent_cars, RentCars.Mailer, adapter: Swoosh.Adapters.Test
 
