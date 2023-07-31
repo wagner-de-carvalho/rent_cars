@@ -1,4 +1,4 @@
-defmodule RentCarsWeb.Api.AccountController do
+defmodule RentCarsWeb.Api.UserController do
   use RentCarsWeb, :controller
   alias RentCarsWeb.FallbackController
   alias RentCars.Accounts
@@ -9,7 +9,7 @@ defmodule RentCarsWeb.Api.AccountController do
     with users <- Accounts.list_users() do
       conn
       |> put_status(:ok)
-      |> render("index.json", accounts: users)
+      |> render("index.json", users: users)
     end
   end
 
@@ -17,7 +17,7 @@ defmodule RentCarsWeb.Api.AccountController do
     with {:ok, user} <- Accounts.create_user(attrs) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.api_account_path(conn, :show, user))
+      |> put_resp_header("location", Routes.api_user_path(conn, :show, user))
       |> render("show.json", user: user)
     end
   end

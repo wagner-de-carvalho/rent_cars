@@ -10,7 +10,6 @@ defmodule RentCars.Accounts.User do
 
   @fields ~w/role/a
   @required_fields ~w/driver_license first_name email last_name password password_confirmation user_name/a
-  @unique_fields ~w/driver_license email user_name/a
 
   schema "users" do
     field :first_name, :string
@@ -36,7 +35,9 @@ defmodule RentCars.Accounts.User do
     |> update_change(:email, &String.downcase/1)
     |> validate_length(:password, min: 6, max: 100)
     |> validate_confirmation(:password)
-    |> unique_constraint(@unique_fields)
+    |> unique_constraint(:driver_license)
+    |> unique_constraint(:email)
+    |> unique_constraint(:user_name)
     |> hash_password()
   end
 

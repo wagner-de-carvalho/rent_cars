@@ -1,6 +1,7 @@
 defmodule RentCars.AccountsTest do
   use RentCars.DataCase
   alias RentCars.Accounts
+  import RentCars.AccountsFixtures
 
   setup do
     valid_attrs = %{
@@ -15,6 +16,14 @@ defmodule RentCars.AccountsTest do
     }
 
     %{valid_attrs: valid_attrs}
+  end
+
+  describe "get_user!/1" do
+    test "get user" do
+      user = user_fixture()
+
+      assert Accounts.get_user!(user.id).email == user.email
+    end
   end
 
   describe "create users" do

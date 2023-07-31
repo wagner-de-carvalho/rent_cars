@@ -1,11 +1,11 @@
-defmodule RentCarsWeb.Api.AccountView do
+defmodule RentCarsWeb.Api.UserView do
   use RentCarsWeb, :view
 
   def render("show.json", %{user: user}) do
     %{data: render_one(user, __MODULE__, "user.json")}
   end
 
-  def render("user.json", %{account: user}) do
+  def render("user.json", %{user: user}) do
     %{
       id: user.id,
       user_name: user.user_name,
@@ -17,7 +17,7 @@ defmodule RentCarsWeb.Api.AccountView do
     }
   end
 
-  def render("index.json", %{accounts: accounts}) do
-    %{data: render_many(accounts, __MODULE__, "user.json")}
+  def render("index.json", %{users: users}) do
+    %{data: render_many(users, __MODULE__, "user.json")}
   end
 end

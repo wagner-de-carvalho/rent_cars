@@ -25,7 +25,7 @@ defmodule RentCarsWeb.Router do
     pipe_through :api
 
     resources "/categories", CategoryController
-    resources "/accounts", AccountController
+    resources "/users", UserController
     resources "/specifications", SpecificationController
   end
 
