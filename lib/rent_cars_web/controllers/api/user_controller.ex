@@ -1,7 +1,7 @@
 defmodule RentCarsWeb.Api.UserController do
   use RentCarsWeb, :controller
-  alias RentCarsWeb.FallbackController
   alias RentCars.Accounts
+  alias RentCarsWeb.FallbackController
 
   action_fallback FallbackController
 
