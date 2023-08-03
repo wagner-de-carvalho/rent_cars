@@ -4,6 +4,14 @@ defmodule RentCars.SessionsTest do
   alias RentCars.Sessions
 
   describe "create/2" do
+    test "get user from token" do
+      user = user_fixture()
+      password = "123456"
+
+      assert {:ok, user_return, _token} = Sessions.create(user.email, password)
+      assert user.email == user_return.email
+    end
+
     test "return authenticated user" do
       user = user_fixture()
       password = "123456"

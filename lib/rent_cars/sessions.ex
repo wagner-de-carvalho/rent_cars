@@ -12,6 +12,10 @@ defmodule RentCars.Sessions do
     |> validate_password(password)
   end
 
+  def me(token) do
+    Tokenr.verify_auth_token(token)
+  end
+
   defp check_user_exist(nil), do: @invalid_credentials_error
 
   defp check_user_exist(%User{} = user), do: user

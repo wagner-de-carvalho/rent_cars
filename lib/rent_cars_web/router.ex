@@ -27,6 +27,8 @@ defmodule RentCarsWeb.Router do
     resources "/categories", CategoryController
     resources "/users", UserController
     resources "/specifications", SpecificationController
+    post "/session", SessionController, :create
+    post "/session/me", SessionController, :me
   end
 
   # Enables LiveDashboard only for development
