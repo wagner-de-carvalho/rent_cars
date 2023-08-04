@@ -14,6 +14,6 @@ defmodule RentCars.Sessions.SendForgotToEmail do
   defp prepare_response(user) do
     user
     |> Tokenr.generate_forgot_email_token()
-    |> then(fn token -> {:ok, user, token} end)
+    |> then(&{:ok, user, &1})
   end
 end
