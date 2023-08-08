@@ -2,11 +2,17 @@ defmodule RentCars.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
+  alias Swoosh.ApiClient.Finch
 
   use Application
 
   @impl true
   def start(_type, _args) do
+    unless Mix.env() == :prod do
+      Dotenv.load()
+      Mix.Task.run("loadconfig")
+    end
+
     children = [
       # Start the Ecto repository
       RentCars.Repo,
@@ -15,9 +21,10 @@ defmodule RentCars.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: RentCars.PubSub},
       # Start the Endpoint (http/https)
-      RentCarsWeb.Endpoint
+      RentCarsWeb.Endpoint,
       # Start a worker by calling: RentCars.Worker.start_link(arg)
       # {RentCars.Worker, arg}
+      #{Finch, name: Swoosh.Finch}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
