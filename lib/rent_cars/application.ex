@@ -2,7 +2,6 @@ defmodule RentCars.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
-  alias Swoosh.ApiClient.Finch
 
   use Application
 
@@ -24,7 +23,7 @@ defmodule RentCars.Application do
       RentCarsWeb.Endpoint,
       # Start a worker by calling: RentCars.Worker.start_link(arg)
       # {RentCars.Worker, arg}
-      #{Finch, name: Swoosh.Finch}
+      {Finch, name: Swoosh.Finch}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
