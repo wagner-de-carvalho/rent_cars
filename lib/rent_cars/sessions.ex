@@ -1,6 +1,7 @@
 defmodule RentCars.Sessions do
   alias RentCars.Accounts.User
   alias RentCars.Repo
+  alias RentCars.Sessions.SendForgotToEmail
   alias RentCars.Shared.Tokenr
 
   @invalid_credentials_error {:error, "E-mail or password is incorrect"}
@@ -30,4 +31,6 @@ defmodule RentCars.Sessions do
       @invalid_credentials_error
     end
   end
+
+  def reset_password(email), do: SendForgotToEmail.execute(email)
 end
