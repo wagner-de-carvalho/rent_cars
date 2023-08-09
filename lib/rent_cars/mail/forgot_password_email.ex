@@ -4,7 +4,7 @@ defmodule RentCars.Mail.ForgotPasswordEmail do
   import Swoosh.Email
   alias RentCars.Mailer
 
-  @url "/sessions/reset_password"
+  @url "/sessions/rest_password"
 
   def create_email(user, token) do
     url = "#{@url}?token=#{token}"

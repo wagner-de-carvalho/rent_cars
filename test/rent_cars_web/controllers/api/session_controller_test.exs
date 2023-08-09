@@ -28,7 +28,7 @@ defmodule RentCarsWeb.Api.SessionControllerTest do
       conn =
         post(
           conn,
-          Routes.api_session_path(conn, :reset_password, email: user.email)
+          Routes.api_session_path(conn, :forgot_password, email: user.email)
         )
 
       assert response(conn, 204) == ""
@@ -39,7 +39,7 @@ defmodule RentCarsWeb.Api.SessionControllerTest do
       conn =
         post(
           conn,
-          Routes.api_session_path(conn, :reset_password, email: email)
+          Routes.api_session_path(conn, :forgot_password, email: email)
         )
 
       assert json_response(conn, 404) == %{"error" => "User does not exist"}

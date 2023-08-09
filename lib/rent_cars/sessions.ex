@@ -32,5 +32,5 @@ defmodule RentCars.Sessions do
     end
   end
 
-  def reset_password(email), do: SendForgotToEmail.execute(email)
+  def forgot_password(email), do: SendForgotToEmail.execute(email)
 end

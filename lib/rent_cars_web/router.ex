@@ -29,7 +29,7 @@ defmodule RentCarsWeb.Router do
     resources "/specifications", SpecificationController
     post "/session", SessionController, :create
     post "/session/me", SessionController, :me
-    post "/session/reset_password", SessionController, :reset_password
+    post "/session/forgot_password", SessionController, :forgot_password
   end
 
   # Enables LiveDashboard only for development

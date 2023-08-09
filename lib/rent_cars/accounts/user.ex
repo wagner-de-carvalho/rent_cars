@@ -27,7 +27,7 @@ defmodule RentCars.Accounts.User do
 
   def changeset(attrs), do: changeset(%__MODULE__{}, attrs)
 
-  def changeset(user, attrs) do
+  def changeset(%__MODULE__{} = user, attrs) do
     user
     |> cast(attrs, @fields ++ @required_fields)
     |> validate_required(@required_fields)
