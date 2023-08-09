@@ -24,7 +24,7 @@ defmodule RentCarsWeb.Api.SessionControllerTest do
       assert json_response(conn, 200)["data"]["user"]["data"]["email"] == user.email
     end
 
-    test "reset password", %{conn: conn, user: user} do
+    test "forgot password", %{conn: conn, user: user} do
       conn =
         post(
           conn,
@@ -34,7 +34,7 @@ defmodule RentCarsWeb.Api.SessionControllerTest do
       assert response(conn, 204) == ""
     end
 
-    test "reset password with wrong e-mail", %{conn: conn} do
+    test "forgot password with wrong e-mail", %{conn: conn} do
       email = "thisemaildoesnotexist@mail.com"
       conn =
         post(
