@@ -2,6 +2,8 @@ defmodule RentCarsWeb.Api.UserControllerTest do
   use RentCarsWeb.ConnCase
   import RentCars.AccountsFixtures
 
+  setup :include_normal_user_token
+
   test "create user when data is valid", %{conn: conn} do
     attrs = user_attrs()
     conn = post(conn, Routes.api_user_path(conn, :create, attrs))
