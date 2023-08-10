@@ -21,4 +21,12 @@ defmodule RentCars.AccountsFixtures do
     |> Accounts.create_user()
     |> then(fn {:ok, user} -> user end)
   end
+
+  def admin_fixture(attrs \\ %{}) do
+    attrs
+    |> user_attrs()
+    |> Map.put(:role, "ADMIN")
+    |> Accounts.create_user()
+    |> then(fn {:ok, user} -> user end)
+  end
 end
