@@ -1,6 +1,7 @@
 defmodule RentCars.Sessions do
   alias RentCars.Accounts.User
   alias RentCars.Repo
+  alias RentCars.Sessions.ResetPassword
   alias RentCars.Sessions.SendForgotToEmail
   alias RentCars.Shared.Tokenr
 
@@ -33,4 +34,5 @@ defmodule RentCars.Sessions do
   end
 
   def forgot_password(email), do: SendForgotToEmail.execute(email)
+  def reset_password(params), do: ResetPassword.execute(params)
 end

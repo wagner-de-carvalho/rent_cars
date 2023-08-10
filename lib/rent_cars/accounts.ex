@@ -11,4 +11,10 @@ defmodule RentCars.Accounts do
   def get_user!(id), do: Repo.get!(User, id)
 
   def list_users, do: Repo.all(User)
+
+  def update_user(user, %{"user" => user_params}) do
+    user
+    |> User.changeset(user_params)
+    |> Repo.update()
+  end
 end
