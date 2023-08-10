@@ -1,6 +1,6 @@
-defmodule RentCarsWeb.Api.SpecificationView do
+defmodule RentCarsWeb.Api.Admin.SpecificationView do
   use RentCarsWeb, :view
-  alias RentCarsWeb.Api.SpecificationView
+  alias RentCarsWeb.Api.Admin.SpecificationView
 
   def render("index.json", %{specifications: specifications}) do
     %{data: render_many(specifications, SpecificationView, "specification.json")}

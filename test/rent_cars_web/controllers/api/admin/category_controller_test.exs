@@ -1,20 +1,22 @@
-defmodule RentCarsWeb.Api.CategoryControllerTest do
+defmodule RentCarsWeb.Api.Admin.CategoryControllerTest do
   use RentCarsWeb.ConnCase
   import RentCars.CategoriesFixtures
 
+  setup :include_admin_token
+
   test "list all categories", %{conn: conn} do
-    conn = get(conn, Routes.api_category_path(conn, :index))
+    conn = get(conn, Routes.api_admin_category_path(conn, :index))
 
     assert json_response(conn, 200)["data"] == []
   end
 
   test "create category when data is valid", %{conn: conn} do
     attrs = %{description: "sport", name: "Acme test"}
-    conn = post(conn, Routes.api_category_path(conn, :create, attrs))
+    conn = post(conn, Routes.api_admin_category_path(conn, :create, attrs))
 
     assert %{"id" => id} = json_response(conn, 201)["data"]
 
-    conn = get(conn, Routes.api_category_path(conn, :show, id))
+    conn = get(conn, Routes.api_admin_category_path(conn, :show, id))
 
     name = String.upcase(attrs.name)
     description = attrs.description
@@ -25,7 +27,7 @@ defmodule RentCarsWeb.Api.CategoryControllerTest do
 
   test "try to create category when data is invalid", %{conn: conn} do
     attrs = %{name: "Acme test"}
-    conn = post(conn, Routes.api_category_path(conn, :create, attrs))
+    conn = post(conn, Routes.api_admin_category_path(conn, :create, attrs))
 
     assert json_response(conn, 422)["errors"] == %{"description" => ["can't be blank"]}
   end
@@ -35,11 +37,13 @@ defmodule RentCarsWeb.Api.CategoryControllerTest do
 
     test "update category with valid data", %{conn: conn, category: category} do
       conn =
-        put(conn, Routes.api_category_path(conn, :update, category), %{name: "update category"})
+        put(conn, Routes.api_admin_category_path(conn, :update, category), %{
+          name: "update category"
+        })
 
       assert %{"id" => id} = json_response(conn, 200)["data"]
 
-      conn = get(conn, Routes.api_category_path(conn, :show, id))
+      conn = get(conn, Routes.api_admin_category_path(conn, :show, id))
 
       json_response(conn, 200)["data"]
 
@@ -57,11 +61,11 @@ defmodule RentCarsWeb.Api.CategoryControllerTest do
 
     test "delete category", %{conn: conn, category: category} do
       id = category.id
-      conn = delete(conn, Routes.api_category_path(conn, :delete, category))
+      conn = delete(conn, Routes.api_admin_category_path(conn, :delete, category))
 
       assert response(conn, 204)
 
-      assert_error_sent 404, fn -> get(conn, Routes.api_category_path(conn, :show, id)) end
+      assert_error_sent 404, fn -> get(conn, Routes.api_admin_category_path(conn, :show, id)) end
     end
   end
 

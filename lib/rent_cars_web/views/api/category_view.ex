@@ -1,4 +1,4 @@
-defmodule RentCarsWeb.Api.CategoryView do
+defmodule RentCarsWeb.Api.Admin.CategoryView do
   use RentCarsWeb, :view
 
   def render("index.json", %{categories: categories}) do

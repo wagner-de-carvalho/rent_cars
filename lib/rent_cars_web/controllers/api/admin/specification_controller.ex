@@ -1,4 +1,4 @@
-defmodule RentCarsWeb.Api.SpecificationController do
+defmodule RentCarsWeb.Api.Admin.SpecificationController do
   use RentCarsWeb, :controller
 
   alias RentCars.Specifications
@@ -16,7 +16,10 @@ defmodule RentCarsWeb.Api.SpecificationController do
            Specifications.create_specification(specification_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.api_specification_path(conn, :show, specification))
+      |> put_resp_header(
+        "location",
+        Routes.api_admin_specification_path(conn, :show, specification)
+      )
       |> render("show.json", specification: specification)
     end
   end

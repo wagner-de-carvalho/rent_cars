@@ -1,7 +1,6 @@
 defmodule RentCars.Sessions.SendForgotToEmailTest do
   use RentCars.DataCase
   import RentCars.AccountsFixtures
-  alias RentCars.Sessions
   alias RentCars.Sessions.SendForgotToEmail
 
   test "send e-mail to reset password" do
