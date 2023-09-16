@@ -5,6 +5,8 @@ defmodule RentCars.Specifications.Specification do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
+  @fields ~w/name description/a
+
   schema "specifications" do
     field :description, :string
     field :name, :string
@@ -17,8 +19,8 @@ defmodule RentCars.Specifications.Specification do
 
   def changeset(specification, attrs) do
     specification
-    |> cast(attrs, [:name, :description])
-    |> validate_required([:name, :description])
+    |> cast(attrs, @fields)
+    |> validate_required(@fields)
     |> unique_constraint(:name)
   end
 end
