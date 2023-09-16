@@ -16,12 +16,12 @@ defmodule RentCars.CarsTest do
       license_plate: "ABC1234",
       category_id: category.id,
       specifications: [
-        %{name: "Wheels", description: "description"},
-        %{name: "Acme", description: "1234"}
+        %{name: "wheels Wheels", description: "description"},
+        %{name: "acme", description: "acme description"}
       ]
     }
 
-    assert {:ok, car} = Cars.create(payload)
+    assert {:ok, _car} = Cars.create(payload)
     # assert car.name == "Lancer"
   end
 end

@@ -3,8 +3,8 @@ defmodule RentCars.Cars do
   alias RentCars.Repo
 
   def create(attrs) do
-    attrs
-    |> Car.changeset()
+    %Car{}
+    |> Car.changeset(attrs)
     |> Repo.insert()
   end
 end
