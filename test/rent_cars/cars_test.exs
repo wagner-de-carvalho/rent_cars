@@ -21,7 +21,17 @@ defmodule RentCars.CarsTest do
       ]
     }
 
-    assert {:ok, _car} = Cars.create(payload)
-    # assert car.name == "Lancer"
+    assert {:ok, car} = Cars.create(payload)
+    assert car.name == payload.name
+    assert car.description == payload.description
+    assert car.brand == payload.brand
+    assert car.daily_rate == payload.daily_rate
+    assert car.license_plate == String.upcase(payload.license_plate)
+    assert car.fine_amount == payload.fine_amount
+
+    Enum.each(car.specifications, fn specification ->
+      assert specification.name in Enum.map(payload.specifications, & &1.name)
+      assert specification.description in Enum.map(payload.specifications, & &1.description)
+    end)
   end
 end
