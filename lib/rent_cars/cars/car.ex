@@ -37,4 +37,15 @@ defmodule RentCars.Cars.Car do
     |> unique_constraint(:license_plate)
     |> cast_assoc(:specifications, with: &Specification.changeset/2)
   end
+
+  def update_changeset(car, attrs) do
+    car
+    |> changeset(attrs)
+    |> validate_change(:license_plate, fn :license_plate, license_plate ->
+      case car.license_plate != license_plate do
+        true -> [license_plate: "you can't update license_plate"]
+        false -> []
+      end
+    end)
+  end
 end

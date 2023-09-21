@@ -1,25 +1,10 @@
 defmodule RentCars.CarsTest do
   use RentCars.DataCase
+  import RentCars.CarsFixtures
   alias RentCars.Cars
-  import RentCars.CategoriesFixtures
 
   test "create a car with success" do
-    category = category_fixture()
-
-    payload = %{
-      name: "Lancer",
-      available: true,
-      description: "good car",
-      brand: "Mitsubishi",
-      daily_rate: 100,
-      fine_amount: 30,
-      license_plate: "ABC1234",
-      category_id: category.id,
-      specifications: [
-        %{name: "wheels Wheels", description: "description"},
-        %{name: "acme", description: "acme description"}
-      ]
-    }
+    payload = car_attrs()
 
     assert {:ok, car} = Cars.create(payload)
     assert car.name == payload.name
@@ -33,5 +18,23 @@ defmodule RentCars.CarsTest do
       assert specification.name in Enum.map(payload.specifications, & &1.name)
       assert specification.description in Enum.map(payload.specifications, & &1.description)
     end)
+  end
+
+  test "update a car with success" do
+    car = car_fixture()
+
+    payload = %{name: "Lancer 2023"}
+
+    assert {:ok, car} = Cars.update(car.id, payload)
+    assert car.name == payload.name
+  end
+
+  test "throws an exception when trying to update the license_plate" do
+    car = car_fixture()
+
+    payload = %{license_plate: "update license_plate"}
+
+    assert {:error, changeset} = Cars.update(car.id, payload)
+    assert "you can't update license_plate" in errors_on(changeset).license_plate
   end
 end
