@@ -22,6 +22,27 @@ defmodule RentCars.CarsFixtures do
     |> then(&Enum.into(attrs, &1))
   end
 
+  def car_attrs_string_keys(attrs \\ %{}) do
+    category = category_fixture()
+
+    %{
+      "name" => "Lancer",
+      "available" => true,
+      "description" => "good car",
+      "brand" => "Mitsubishi",
+      "daily_rate" => 100,
+      "fine_amount" => 30,
+      "license_plate" => "ABC#{:rand.uniform(10_000)}",
+      "category" => category,
+      "category_id" => category.id
+      # "specifications" => [
+      #   %{"name" => "wheels Wheels", "description" => "description"},
+      #   %{"name" => "acme", "description" => "acme description"}
+      # ]
+    }
+    |> then(&Enum.into(attrs, &1))
+  end
+
   def car_fixture(attrs \\ %{}) do
     attrs
     |> car_attrs()
