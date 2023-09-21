@@ -37,6 +37,10 @@ defmodule RentCarsWeb.Router do
     scope "/admin", Admin, as: :admin do
       pipe_through :is_admin
 
+      post "/cars", CarController, :create
+      get "/cars/:id", CarController, :show
+      put "/cars/:id", CarController, :update
+
       resources "/categories", CategoryController
       resources "/specifications", SpecificationController
     end
