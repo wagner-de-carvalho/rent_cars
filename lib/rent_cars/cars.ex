@@ -8,7 +8,13 @@ defmodule RentCars.Cars do
     |> Repo.insert()
   end
 
-  def get_car!(car_id), do: Repo.get!(Car, car_id)
+  def get_car!(car_id) do
+    Car
+    |> Repo.get!(car_id)
+    |> Repo.preload([:specifications])
+  end
+
+  def list_cars, do: Repo.all(Car)
 
   def update(car_id, attrs) do
     car_id

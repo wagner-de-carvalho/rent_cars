@@ -59,6 +59,7 @@ defmodule RentCars.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:argon2_elixir, "~> 3.0"},
       {:finch, "~> 0.13.0"},
+      {:money, "~> 1.11"},
       {:dotenv, "~> 3.0.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
