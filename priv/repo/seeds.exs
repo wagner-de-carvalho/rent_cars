@@ -17,7 +17,7 @@ alias RentCars.Accounts
   last_name: "foo",
   user_name: "admin",
   email: "admin_foo@mail.com",
-  driver_license: "123456",
+  driver_license: "123007",
   password: "12345678",
   password_confirmation: "12345678",
   role: "ADMIN"

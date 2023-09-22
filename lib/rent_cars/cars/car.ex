@@ -16,7 +16,7 @@ defmodule RentCars.Cars.Car do
     field :brand, :string
     field :daily_rate, :integer
     field :description, :string
-    field :fine_amount, :integer
+    field :fine_amount, Money.Ecto.Amount.Type
     field :license_plate, :string
     field :name, :string
     belongs_to :category, Category
