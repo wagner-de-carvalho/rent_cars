@@ -6,7 +6,7 @@ defmodule RentCars.CarsFixtures do
     category = category_fixture()
 
     %{
-      name: "Lancer",
+      name: "Lancer #{:rand.uniform(10_000)}",
       available: true,
       description: "good car",
       brand: "Mitsubishi",

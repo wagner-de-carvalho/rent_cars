@@ -37,4 +37,15 @@ defmodule RentCars.CarsTest do
     assert {:error, changeset} = Cars.update(car.id, payload)
     assert "you can't update license_plate" in errors_on(changeset).license_plate
   end
+
+  test "list all available cars" do
+    Enum.each(1..5, fn number ->
+      case number / 2 != 0 do
+        true -> car_fixture(%{available: false})
+        false -> car_fixture()
+      end
+    end)
+
+    Cars.list_cars() == "x"
+  end
 end
