@@ -12,7 +12,7 @@ defmodule RentCars.CarsTest do
     assert car.brand == payload.brand
     assert car.daily_rate == payload.daily_rate
     assert car.license_plate == String.upcase(payload.license_plate)
-    assert car.fine_amount == payload.fine_amount
+    assert car.fine_amount == Money.new(payload.fine_amount)
 
     Enum.each(car.specifications, fn specification ->
       assert specification.name in Enum.map(payload.specifications, & &1.name)
