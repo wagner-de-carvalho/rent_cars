@@ -13,14 +13,6 @@ defmodule RentCarsWeb.Api.Admin.CarController do
     end
   end
 
-  def index(conn, _params) do
-    with cars <- Cars.list_cars() do
-      conn
-      |> put_status(:ok)
-      |> render("index.json", cars: cars)
-    end
-  end
-
   def show(conn, %{"id" => id}) do
     car = Cars.get_car!(id)
 
