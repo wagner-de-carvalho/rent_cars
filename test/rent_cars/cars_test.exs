@@ -39,13 +39,29 @@ defmodule RentCars.CarsTest do
     assert "you can't update license_plate" in errors_on(changeset).license_plate
   end
 
-  test "list all available cars with filters" do
+  test "list all available cars" do
     category = category_fixture()
     car_fixture(%{category_id: category.id})
-    car_fixture(%{category_id: category.id, name: "Lancer"})
+    car_fixture(%{category_id: category.id, name: "Fox"})
     car_fixture(%{available: false, category_id: category.id})
 
-    assert Cars.list_cars() |> Enum.count() == 1
-    assert Cars.list_cars(name: "Lancer") |> Enum.count() == 1
+    assert Cars.list_cars() |> Enum.count() == 2
+    assert Cars.list_cars(name: "Fox") |> Enum.count() == 1
+  end
+
+  test "list all available cars by brand" do
+    category = category_fixture()
+    car_fixture(%{category_id: category.id, name: "Lancer"})
+    car_fixture(%{category_id: category.id, brand: "Mitsubishi"})
+
+    assert Cars.list_cars(brand: "Mitsu") |> Enum.count() == 2
+  end
+
+  test "list all available cars by category" do
+    category = category_fixture(%{name: "acme"})
+    car_fixture(%{brand: "acme"})
+    car_fixture(%{category_id: category.id, name: "Lancer"})
+
+    assert Cars.list_cars(category: "acme") |> Enum.count() == 1
   end
 end
