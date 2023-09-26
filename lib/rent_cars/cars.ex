@@ -23,6 +23,17 @@ defmodule RentCars.Cars do
       {:name, name}, query ->
         name = "%" <> name <> "%"
         where(query, [c], ilike(c.name, ^name))
+
+      {:brand, brand}, query ->
+        brand = "%" <> brand <> "%"
+        where(query, [c], ilike(c.brand, ^brand))
+
+      {:category, category}, query ->
+        category = "%" <> category <> "%"
+
+        query
+        |> join(:inner, [c], ca in assoc(c, :category))
+        |> where([_c, ca], ilike(ca.name, ^category))
     end)
     |> preload([:specifications])
     |> Repo.all()
