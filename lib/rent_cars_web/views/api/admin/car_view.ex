@@ -1,4 +1,4 @@
-defmodule RentCarsWeb.Api.CarView do
+defmodule RentCarsWeb.Api.Admin.CarView do
   use RentCarsWeb, :view
   alias RentCarsWeb.Api.Admin.CategoryView
   alias RentCarsWeb.Api.Admin.SpecificationView
@@ -7,6 +7,11 @@ defmodule RentCarsWeb.Api.CarView do
     %{data: render_many(cars, __MODULE__, "car.json")}
   end
 
+  def render("show.json", %{car: car}) do
+    %{data: render_one(car, __MODULE__, "car.json")}
+  end
+
+  # //TODO melhoria render: transformar em lista -> verificar se é struct -> se for, transformar em mapa -> retornar
   def render("car.json", %{car: car}) do
     %{
       id: car.id,
