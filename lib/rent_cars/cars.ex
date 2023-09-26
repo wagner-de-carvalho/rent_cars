@@ -1,4 +1,5 @@
 defmodule RentCars.Cars do
+  import Ecto.Query
   alias RentCars.Cars.Car
   alias RentCars.Repo
 
@@ -14,7 +15,18 @@ defmodule RentCars.Cars do
     |> Repo.preload([:specifications])
   end
 
-  def list_cars, do: Repo.all(Car)
+  def list_cars(filter_params \\ []) do
+    query = where(Car, [c], c.available == true)
+
+    filter_params
+    |> Enum.reduce(query, fn
+      {:name, name}, query ->
+        name = "%" <> name <> "%"
+        where(query, [c], ilike(c.name, ^name))
+    end)
+    |> preload([:specifications])
+    |> Repo.all()
+  end
 
   def update(car_id, attrs) do
     car_id

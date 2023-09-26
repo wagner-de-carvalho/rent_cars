@@ -1,6 +1,7 @@
 defmodule RentCars.CarsTest do
   use RentCars.DataCase
   import RentCars.CarsFixtures
+  import RentCars.CategoriesFixtures
   alias RentCars.Cars
 
   test "create a car with success" do
@@ -36,5 +37,15 @@ defmodule RentCars.CarsTest do
 
     assert {:error, changeset} = Cars.update(car.id, payload)
     assert "you can't update license_plate" in errors_on(changeset).license_plate
+  end
+
+  test "list all available cars with filters" do
+    category = category_fixture()
+    car_fixture(%{category_id: category.id})
+    car_fixture(%{category_id: category.id, name: "Lancer"})
+    car_fixture(%{available: false, category_id: category.id})
+
+    assert Cars.list_cars() |> Enum.count() == 1
+    assert Cars.list_cars(name: "Lancer") |> Enum.count() == 1
   end
 end
