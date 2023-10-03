@@ -2,11 +2,12 @@ defmodule RentCars.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Ecto.Enum
+  alias RentCars.Rentals.Rental
 
   @role_values ~w/ADMIN USER/a
 
   @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key :binary_id
+  # @foreign_key :binary_id
 
   @fields ~w/role/a
   @required_fields ~w/driver_license first_name email last_name password password_confirmation user_name/a
@@ -21,6 +22,7 @@ defmodule RentCars.Accounts.User do
     field :password_hash, :string
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
+    has_many :rentals, Rental
 
     timestamps()
   end

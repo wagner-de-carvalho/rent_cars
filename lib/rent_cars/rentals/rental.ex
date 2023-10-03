@@ -1,9 +1,9 @@
-defmodule RentCars.Rental do
+defmodule RentCars.Rentals.Rental do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @fields ~w/start_date end_date expected_return_date total/a
-  @required ~w/start_date end_date expected_return_date total/a
+  @fields ~w/end_date total/a
+  @required ~w/start_date expected_return_date user_id car_id/a
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -23,7 +23,7 @@ defmodule RentCars.Rental do
 
   def changeset(rental, attrs) do
     rental
-    |> cast(attrs, @fields)
+    |> cast(attrs, @fields ++ @required)
     |> validate_required(@required)
   end
 end
