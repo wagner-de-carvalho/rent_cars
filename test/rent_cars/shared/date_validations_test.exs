@@ -7,6 +7,7 @@ defmodule RentCars.Shared.DateValidationsTest do
       end_date =
         NaiveDateTime.utc_now()
         |> then(&%{&1 | hour: &1.hour + 5})
+        |> then(fn %{hour: hour} = date_param -> if(hour > 23, do: %{date_param | hour: 23}) end)
         |> NaiveDateTime.to_string()
 
       expected_response = {:error, "Invalid return date"}

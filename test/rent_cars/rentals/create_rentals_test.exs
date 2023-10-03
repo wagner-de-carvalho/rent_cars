@@ -28,8 +28,9 @@ defmodule RentCars.Rentals.CreateRentalsTest do
 
     test "throws an error when date is before 24 hours", %{car_available: car, user: user} do
       expected_return_date =
-        NaiveDateTime.utc_now()
+        NaiveDateTime.utc_now(Calendar.ISO)
         |> then(&%{&1 | hour: &1.hour + 5})
+        |> then(fn %{hour: hour} = date_param -> if(hour > 23, do: %{date_param | hour: 23}) end)
         |> NaiveDateTime.to_string()
 
       assert {:error, "Invalid return date"} ==
