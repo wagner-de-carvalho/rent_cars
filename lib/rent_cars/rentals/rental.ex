@@ -1,6 +1,8 @@
 defmodule RentCars.Rentals.Rental do
   use Ecto.Schema
   import Ecto.Changeset
+  alias RentCars.Accounts.User
+  alias RentCars.Cars.Car
 
   @fields ~w/end_date total/a
   @required ~w/start_date expected_return_date user_id car_id/a
@@ -12,8 +14,8 @@ defmodule RentCars.Rentals.Rental do
     field :expected_return_date, :naive_datetime
     field :start_date, :naive_datetime
     field :total, :integer
-    field :car_id, :binary_id
-    field :user_id, :binary_id
+    belongs_to :car, Car
+    belongs_to :user, User
 
     timestamps()
   end

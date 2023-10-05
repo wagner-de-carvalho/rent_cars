@@ -17,7 +17,8 @@ defmodule RentCarsWeb.Api.CarView do
       fine_amount: Money.to_string(car.fine_amount),
       category: load_category(car.category),
       specifications: load_specifications(car.specifications),
-      name: car.name
+      name: car.name,
+      available: car.available
     }
   end
 
