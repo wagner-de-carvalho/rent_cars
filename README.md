@@ -18,5 +18,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
 
-  ### Estudos
+  ### Studies
+  Verify:
+-  ** (UndefinedFunctionError) function NaiveDateTime.fetch/2 is undefined (NaiveDateTime does not implement the Access behaviour. If you are using get_in/put_in/update_in, you can specify the field to be accessed using Access.key!/1)
  
