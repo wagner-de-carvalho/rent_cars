@@ -15,4 +15,15 @@ defmodule RentCarsWeb.Api.RentalController do
       |> render("show.json", rental: rental)
     end
   end
+
+  def index(conn, _args) do
+    [user_id] = get_req_header(conn, "user_id")
+
+    with rentals when is_list(rentals) <-
+           Rentals.list_rentals(user_id) do
+      conn
+      |> put_status(:ok)
+      |> render("index.json", rentals: rentals)
+    end
+  end
 end

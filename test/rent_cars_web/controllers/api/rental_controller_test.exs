@@ -1,6 +1,7 @@
 defmodule RentCarsWeb.Api.RentalControllerTest do
   use RentCarsWeb.ConnCase
   import RentCars.CarsFixtures
+  import RentCars.RentalsFixtures
 
   describe "create/2" do
     setup :include_normal_user_token
@@ -16,6 +17,22 @@ defmodule RentCarsWeb.Api.RentalControllerTest do
       conn = post(conn, Routes.api_rental_path(conn, :create, payload))
 
       assert json_response(conn, 201)["data"]["car_id"] == car.id
+    end
+  end
+
+  describe "index/2" do
+    setup :include_normal_user_token
+
+    test "create rental", %{conn: conn, user: user} do
+      car = car_fixture()
+      rental_fixture(%{user_id: user.id, car_id: car.id})
+
+      conn = get(conn, Routes.api_rental_path(conn, :index))
+      response = json_response(conn, 200)["data"]
+      rental = hd(response)
+
+      assert response |> Enum.count() >= 0
+      assert rental["car"]["data"]["id"] == car.id
     end
   end
 

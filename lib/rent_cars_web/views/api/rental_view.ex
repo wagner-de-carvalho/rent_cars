@@ -3,6 +3,10 @@ defmodule RentCarsWeb.Api.RentalView do
   alias RentCars.Repo
   alias RentCarsWeb.Api.Admin.CarView
 
+  def render("index.json", %{rentals: rentals}) do
+    %{data: render_many(rentals, __MODULE__, "rental.json")}
+  end
+
   def render("show.json", %{rental: rental}) do
     %{data: render_one(rental, __MODULE__, "rental.json")}
   end
