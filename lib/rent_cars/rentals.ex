@@ -1,8 +1,8 @@
 defmodule RentCars.Rentals do
   import Ecto.Query
   alias __MODULE__.CreateRental
-  alias RentCars.Repo
   alias RentCars.Rentals.Rental
+  alias RentCars.Repo
 
   def create(payload) do
     %{
