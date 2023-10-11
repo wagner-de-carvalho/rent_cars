@@ -13,7 +13,7 @@ defmodule RentCars.Rentals.Rental do
     field :end_date, :naive_datetime
     field :expected_return_date, :naive_datetime
     field :start_date, :naive_datetime
-    field :total, :integer
+    field :total, Money.Ecto.Amount.Type
     belongs_to :car, Car
     belongs_to :user, User
 

@@ -1,5 +1,7 @@
 defmodule RentCars.Rentals.ReturnCar do
   import Ecto.Query
+  alias Ecto.Multi
+  alias RentCars.Cars.Car
   alias RentCars.Rentals.Rental
   alias RentCars.Repo
 
@@ -9,7 +11,7 @@ defmodule RentCars.Rentals.ReturnCar do
     with %__MODULE__{} = return_rental <- get_rental(rental_id, user_id),
          return_rental <- calculate_delay(return_rental),
          return_rental <- calculate_fees(return_rental) do
-      return_rental
+      return_car(return_rental)
     else
       error -> error
     end
@@ -41,5 +43,19 @@ defmodule RentCars.Rentals.ReturnCar do
     calculate_fine = (delay > 0 && delay * car.fine_amount.amount) || 0
     total_fees = days * car.daily_rate + calculate_fine
     %{return_car | total_fees: total_fees}
+  end
+
+  defp return_car(%{rental: rental, total_fees: total_fees} = return_rental) do
+    Multi.new()
+    |> Multi.update(:car_is_available, Car.changeset(rental.car, %{available: true}))
+    |> Multi.update(
+      :return_car,
+      Rental.changeset(rental, %{
+        total: Money.new(total_fees * 100),
+        end_date: NaiveDateTime.utc_now()
+      })
+    )
+    |> Repo.transaction()
+    |> then(fn rental -> %{return_rental | rental: rental} end)
   end
 end
