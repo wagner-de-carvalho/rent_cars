@@ -68,13 +68,24 @@ defmodule RentCars.Rentals.CreateRentalsTest do
 
   defp create_expected_return_date do
     NaiveDateTime.utc_now()
-    |> then(&%{&1 | month: &1.month + 1})
+    |> then(fn date ->
+      case date.month + 1 > 12 do
+        true -> %{date | month: 12}
+        false -> %{date | month: date.month + 1}
+      end
+    end)
     |> NaiveDateTime.to_string()
   end
 
   defp create_expected_return_hour_date do
     NaiveDateTime.utc_now()
     |> then(&%{&1 | hour: &1.hour + 2})
+    |> then(fn date ->
+      case date.hour + 2 > 23 do
+        true -> %{date | hour: 23}
+        false -> %{date | hour: date.hour + 2}
+      end
+    end)
     |> NaiveDateTime.to_string()
   end
 end
