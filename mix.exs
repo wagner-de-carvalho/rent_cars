@@ -61,6 +61,8 @@ defmodule RentCars.MixProject do
       {:finch, "~> 0.13.0"},
       {:money, "~> 1.11"},
       {:timex, "~> 3.0"},
+      {:waffle, "~> 1.1"},
+      {:waffle_ecto, "~> 0.0.11"},
       {:dotenv, "~> 3.0.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},

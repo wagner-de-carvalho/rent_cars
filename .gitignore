@@ -32,3 +32,6 @@ rent_cars-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Waffle uploads
+/uploads/
+

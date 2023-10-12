@@ -1,7 +1,8 @@
 defmodule RentCars.AccountsTest do
   use RentCars.DataCase
-  alias RentCars.Accounts
   import RentCars.AccountsFixtures
+  alias RentCars.Accounts
+  alias RentCars.Accounts.Avatar
 
   setup do
     valid_attrs = %{
@@ -58,6 +59,23 @@ defmodule RentCars.AccountsTest do
       assert {:ok, _user} = Accounts.create_user(valid_attrs)
       assert {:error, changeset} = Accounts.create_user(valid_attrs)
       assert "has already been taken" in errors_on(changeset).driver_license
+    end
+  end
+
+  describe "upload_avatar/1" do
+    test "upload avatar image" do
+      user = user_fixture()
+
+      photo = %Plug.Upload{
+        content_type: "image/png",
+        path: "test/support/fixtures/avatar.png",
+        filename: "avatar.png"
+      }
+
+      assert Accounts.upload_photo(user.id, photo) == {:ok, "avatar.png"}
+
+      assert Avatar.url({"avatar.png", user}, :original) =~
+               "/uploads/accounts/users/"
     end
   end
 end
