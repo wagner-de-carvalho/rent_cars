@@ -1,7 +1,8 @@
 defmodule RentCars.Rentals do
   import Ecto.Query
   alias __MODULE__.CreateRental
-  alias RentCars.Rentals.Rental
+  alias __MODULE__.Rental
+  alias __MODULE__.ReturnCar
   alias RentCars.Repo
 
   def create(payload) do
@@ -20,4 +21,6 @@ defmodule RentCars.Rentals do
     |> preload(car: [:category, :specifications])
     |> Repo.all()
   end
+
+  defdelegate return_car(rental_id, user_id), to: ReturnCar, as: :execute
 end
