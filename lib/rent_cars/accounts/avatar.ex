@@ -1,5 +1,7 @@
 defmodule RentCars.Accounts.Avatar do
   use Waffle.Definition
+  use Waffle.Ecto.Definition
+
   @extension_whitelist ~w(.jpg .jpeg .png)
 
   def validate({file, _}) do

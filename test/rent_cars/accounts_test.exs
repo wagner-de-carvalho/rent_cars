@@ -3,6 +3,7 @@ defmodule RentCars.AccountsTest do
   import RentCars.AccountsFixtures
   alias RentCars.Accounts
   alias RentCars.Accounts.Avatar
+  alias RentCars.Accounts.User
 
   setup do
     valid_attrs = %{
@@ -72,7 +73,8 @@ defmodule RentCars.AccountsTest do
         filename: "avatar.png"
       }
 
-      assert Accounts.upload_photo(user.id, photo) == {:ok, "avatar.png"}
+      assert {:ok, %User{} = updated_user} = Accounts.upload_photo(user.id, photo)
+      assert updated_user.avatar.file_name == photo.filename
 
       assert Avatar.url({"avatar.png", user}, :original) =~
                "/uploads/accounts/users/"
