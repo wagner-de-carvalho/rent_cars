@@ -40,6 +40,7 @@ defmodule RentCarsWeb.Router do
       pipe_through :is_admin
 
       post "/cars", CarController, :create
+      patch "/cars/images/:id", CarController, :create_images
       get "/cars/:id", CarController, :show
       put "/cars/:id", CarController, :update
 

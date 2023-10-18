@@ -9,6 +9,14 @@ defmodule RentCars.Cars do
     |> Repo.insert()
   end
 
+  def create_images(id, images) do
+    id
+    |> get_car!()
+    |> Repo.preload([:images])
+    |> Car.changeset(%{images: images})
+    |> Repo.update()
+  end
+
   def get_car!(car_id) do
     Car
     |> Repo.get!(car_id)

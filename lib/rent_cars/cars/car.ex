@@ -1,6 +1,7 @@
 defmodule RentCars.Cars.Car do
   use Ecto.Schema
   import Ecto.Changeset
+  alias RentCars.Cars.CarImage
   alias RentCars.Cars.CarSpecification
   alias RentCars.Categories.Category
   alias RentCars.Specifications.Specification
@@ -22,7 +23,7 @@ defmodule RentCars.Cars.Car do
     belongs_to :category, Category
 
     many_to_many :specifications, Specification, join_through: CarSpecification
-
+    has_many :images, CarImage
     timestamps()
   end
 
@@ -35,6 +36,7 @@ defmodule RentCars.Cars.Car do
     |> validate_required(@required)
     |> update_change(:license_plate, &String.upcase/1)
     |> unique_constraint(:license_plate)
+    |> cast_assoc(:images, with: &CarImage.changeset/2)
     |> cast_assoc(:specifications, with: &Specification.changeset/2)
   end
 
