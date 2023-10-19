@@ -10,9 +10,11 @@ defmodule RentCars.Cars do
   end
 
   def create_images(id, images) do
+    images = Enum.map(images, &Map.put(&1, :car_id, id)) |> IO.inspect(label: "IMAGES>>")
+
     id
     |> get_car!()
-    |> Repo.preload([:images])
+    |> Repo.preload(:images)
     |> Car.changeset(%{images: images})
     |> Repo.update()
   end

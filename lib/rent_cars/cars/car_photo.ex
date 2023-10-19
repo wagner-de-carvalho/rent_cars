@@ -16,7 +16,7 @@ defmodule RentCars.Cars.CarPhoto do
     end
   end
 
-  def storage_dir(_, {file, _car}) do
-    "uploads/cars/#{file.file_name}"
+  def storage_dir(_, {_file, car_image}) do
+    "uploads/cars/#{car_image.car_id}"
   end
 end
