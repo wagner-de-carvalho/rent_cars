@@ -71,23 +71,23 @@ defmodule RentCars.CarsTest do
     images = [
       %{
         image: %Plug.Upload{
-          path: "test/support/fixtures/lancer.jpeg",
+          path: "test/support/fixtures/car_1.jpg",
           content_type: "image/jpeg",
-          filename: "lancer.jpeg"
+          filename: "car_1.jpg"
         }
       },
       %{
         image: %Plug.Upload{
-          path: "test/support/fixtures/mercedes-benz.jpg",
+          path: "test/support/fixtures/car_2.jpeg",
           content_type: "image/jpeg",
-          filename: "mercedes-benz.jpg"
+          filename: "car_2.jpeg"
         }
       },
       %{
         image: %Plug.Upload{
-          path: "test/support/fixtures/ferrari.jpg",
+          path: "test/support/fixtures/car_3.jpg",
           content_type: "image/jpeg",
-          filename: "ferrari.jpg"
+          filename: "car_3.jpg"
         }
       }
     ]
@@ -95,9 +95,9 @@ defmodule RentCars.CarsTest do
     assert {:ok, %{images: images_result}} = Cars.create_images(car.id, images)
 
     assert images_result |> Enum.map(& &1.image.file_name) == [
-             "lancer.jpeg",
-             "mercedes-benz.jpg",
-             "ferrari.jpg"
+             "car_1.jpg",
+             "car_2.jpeg",
+             "car_3.jpg"
            ]
   end
 end

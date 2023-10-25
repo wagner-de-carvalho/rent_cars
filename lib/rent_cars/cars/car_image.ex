@@ -16,7 +16,7 @@ defmodule RentCars.Cars.CarImage do
   @doc false
   def changeset(car_image, attrs) do
     car_image
-    |> cast(attrs, [:image])
+    |> cast(attrs, [:car_id])
     |> cast_attachments(attrs, [:image])
   end
 end
