@@ -9,6 +9,16 @@ defmodule RentCars.Cars do
     |> Repo.insert()
   end
 
+  def create_images(id, images) do
+    images = Enum.map(images, &Map.put(&1, :car_id, id))
+
+    id
+    |> get_car!()
+    |> Repo.preload(:images)
+    |> Car.changeset(%{images: images})
+    |> Repo.update()
+  end
+
   def get_car!(car_id) do
     Car
     |> Repo.get!(car_id)
@@ -35,7 +45,7 @@ defmodule RentCars.Cars do
         |> join(:inner, [c], ca in assoc(c, :category))
         |> where([_c, ca], ilike(ca.name, ^category))
     end)
-    |> preload([:specifications])
+    |> preload([:specifications, :images])
     |> Repo.all()
   end
 

@@ -1,5 +1,4 @@
 defmodule RentCars.Accounts do
-  alias RentCars.Accounts.Avatar
   alias RentCars.Accounts.User
   alias RentCars.Repo
 
