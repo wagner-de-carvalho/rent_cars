@@ -81,4 +81,20 @@ if config_env() == :prod do
   config :swoosh, :api_client, Swoosh.ApiClient.Finch
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+
+  # Waffle AWS S3 Bucket
+  config :waffle,
+    storage: Waffle.Storage.S3,
+    bucket: System.fetch_env!("AWS_S3_BUCKET")
+
+  config :ex_aws,
+    json_codec: Jason,
+    access_key_id: System.fetch_env!("AWS_ACCESS_KEY_ID"),
+    secret_access_key: System.fetch_env!("AWS_SECRET_ACCESS_KEY"),
+    region: System.fetch_env!("AWS_REGION"),
+    s3: [
+      scheme: System.fetch_env!("AWS_SCHEME"),
+      host: System.fetch_env!("AWS_HOST"),
+      region: System.fetch_env!("AWS_REGION")
+    ]
 end

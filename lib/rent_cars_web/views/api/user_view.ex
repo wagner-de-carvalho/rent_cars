@@ -12,7 +12,7 @@ defmodule RentCarsWeb.Api.UserView do
       user_name: user.user_name,
       email: user.email,
       role: user.role,
-      avatar: Avatar.url({user.avatar, user}),
+      avatar: Avatar.url({user.avatar, user}, signed: true),
       last_name: user.last_name,
       first_name: user.first_name,
       driver_license: user.driver_license
