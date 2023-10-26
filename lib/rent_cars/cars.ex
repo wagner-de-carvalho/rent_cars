@@ -45,7 +45,7 @@ defmodule RentCars.Cars do
         |> join(:inner, [c], ca in assoc(c, :category))
         |> where([_c, ca], ilike(ca.name, ^category))
     end)
-    |> preload([:specifications])
+    |> preload([:specifications, :images])
     |> Repo.all()
   end
 

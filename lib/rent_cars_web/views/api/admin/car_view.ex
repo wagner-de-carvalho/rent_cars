@@ -1,5 +1,6 @@
 defmodule RentCarsWeb.Api.Admin.CarView do
   use RentCarsWeb, :view
+  alias RentCars.Cars.CarPhoto
   alias RentCarsWeb.Api.Admin.CategoryView
   alias RentCarsWeb.Api.Admin.SpecificationView
 
@@ -22,27 +23,35 @@ defmodule RentCarsWeb.Api.Admin.CarView do
       fine_amount: Money.to_string(car.fine_amount),
       category: load_category(car.category),
       specifications: load_specifications(car.specifications),
+      images: load_images(car),
       name: car.name
     }
   end
 
   defp load_specifications(specifications) do
-    case Ecto.assoc_loaded?(specifications) do
-      true ->
-        SpecificationView.render("index.json", %{specifications: specifications})
-
-      false ->
-        []
-    end
+    specifications
+    |> Ecto.assoc_loaded?()
+    |> then(fn
+      true -> SpecificationView.render("index.json", %{specifications: specifications})
+      false -> []
+    end)
   end
 
   defp load_category(category) do
-    case Ecto.assoc_loaded?(category) do
-      true ->
-        CategoryView.render("category.json", %{category: category})
+    category
+    |> Ecto.assoc_loaded?()
+    |> then(fn
+      true -> CategoryView.render("category.json", %{category: category})
+      false -> nil
+    end)
+  end
 
-      false ->
-        nil
-    end
+  defp load_images(%{images: images} = cars) do
+    cars.images
+    |> Ecto.assoc_loaded?()
+    |> then(fn
+      true -> Enum.map(images, &CarPhoto.url({&1.image, &1}))
+      false -> []
+    end)
   end
 end
