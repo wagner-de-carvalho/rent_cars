@@ -52,9 +52,20 @@ config :phoenix, :json_library, Jason
 config :money,
   default_currency: :USD
 
-# Waffle
+# Waffle Local
+# config :waffle,
+#   storage: Waffle.Storage.Local
+
+# Waffle AWS S3 Bucket
 config :waffle,
-  storage: Waffle.Storage.Local
+  storage: Waffle.Storage.S3,
+  bucket: System.fetch_env!("AWS_S3_BUCKET")
+
+config :ex_aws,
+json_codec: Jason,
+access_key_id: System.fetch_env!("AWS_ACCESS_KEY_ID"),
+secret_access_key: System.fetch_env!("SECRET_ACCESS_KEY"),
+region: System.fetch_env!("AWS_REGION")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
